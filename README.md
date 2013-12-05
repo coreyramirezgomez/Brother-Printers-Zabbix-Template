@@ -1,7 +1,15 @@
 Author: Corey Ramirez-Gomez
+
 Website: www.coreyramirezgomez.com
+
 Purpose: Monitor Brother Model SNMP enabled printers.
-Verison: 1.0
+
+Current Verison: 
+1.0 - Consumables Check
+
+Planned Versions: 
+2.0 - Paper Checks
+3.0 - Messages
 
 Description:
 
