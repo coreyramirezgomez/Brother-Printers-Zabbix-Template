@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2013-12-04T23:57:41Z</date>
+    <date>2013-12-27T21:48:37Z</date>
     <groups>
-        <group>
-            <name>Homebrews</name>
-        </group>
         <group>
             <name>Printers</name>
         </group>
@@ -16,18 +13,100 @@
             <name>Brother Printers</name>
             <groups>
                 <group>
-                    <name>Homebrews</name>
-                </group>
-                <group>
                     <name>Printers</name>
                 </group>
             </groups>
             <applications>
                 <application>
+                    <name>JetDirect</name>
+                </application>
+                <application>
+                    <name>Print Spooler</name>
+                </application>
+                <application>
                     <name>SNMP Enabled Printer</name>
                 </application>
             </applications>
-            <items/>
+            <items>
+                <item>
+                    <name>JetDirect Check</name>
+                    <type>3</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.service[tcp,,9100]</key>
+                    <delay>30</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>JetDirect</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                </item>
+                <item>
+                    <name>Print Spooler Check</name>
+                    <type>3</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.service[tcp,,515]</key>
+                    <delay>30</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Print Spooler</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                </item>
+            </items>
             <discovery_rules>
                 <discovery_rule>
                     <name>Consumables</name>
@@ -55,6 +134,60 @@
                     <lifetime>30</lifetime>
                     <description/>
                     <item_prototypes>
+                        <item_prototype>
+                            <name>$1 Calculated Capacity (current/max)</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>1</multiplier>
+                            <snmp_oid/>
+                            <key>CosumableCalculated[{#SNMPVALUE}]</key>
+                            <delay>30</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units>%</units>
+                            <delta>0</delta>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privpassphrase/>
+                            <formula>100</formula>
+                            <delay_flex/>
+                            <params>last(&quot;ConsumableCurrentCapacity[{#SNMPVALUE}]&quot;)/last(&quot;ConsumableMaxCapacity[{#SNMPVALUE}]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Depending on the consumable (toner vs drum/belt) this calculation will return a particular percentage.&#13;
+&#13;
+Drum Units &amp; Belt Units return integer values that can be used in calculations to determine a percentage of how much of the unit is remaining. Max &quot;status&quot; is stored in the MIB and is used in the calculation.&#13;
+&#13;
+Toner consumables return the follow codes:&#13;
+-3 = Level Okay&#13;
+-2 = Low Warning (equivalent to “max status”)&#13;
+0 = Critical/empty&#13;
+&#13;
+Toner possibilities for calculations of current / max * 100&#13;
+&#13;
+-3 / -2 * 100 = 150%&#13;
+-2 / -2 * 100 = 100%&#13;
+0 / -2 * 100 = 0%&#13;
+&#13;
+The calculations above are used in the triggers to make it very straight forward on determining if a toner is low or not.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>SNMP Enabled Printer</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                        </item_prototype>
                         <item_prototype>
                             <name>$1 Current Capacity</name>
                             <type>4</type>
@@ -136,30 +269,21 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Brother Printers:ConsumableCurrentCapacity[{#SNMPVALUE}].last(0)}=0|{Brother Printers:ConsumableCurrentCapacity[{#SNMPVALUE}].last(0)}/{Brother Printers:ConsumableMaxCapacity[{#SNMPVALUE}].last(0)}*100&lt;10</expression>
-                            <name>{HOSTNAME} {#SNMPVALUE} - Critical</name>
+                            <expression>{Brother Printers:CosumableCalculated[{#SNMPVALUE}].last(0)}&lt;10|{Brother Printers:ConsumableCurrentCapacity[{#SNMPVALUE}].last(0)}=0</expression>
+                            <name>{HOSTNAME} {#SNMPVALUE} - Critical: {ITEM.LASTVALUE}</name>
                             <url/>
                             <status>0</status>
                             <priority>4</priority>
-                            <description/>
+                            <description>Checks if at &quot;critical&quot; level for Toners (code = 0) or drum/belt (&lt;10%)</description>
                             <type>0</type>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Brother Printers:ConsumableCurrentCapacity[{#SNMPVALUE}].last(0)} = -2|{Brother Printers:ConsumableCurrentCapacity[{#SNMPVALUE}].last(0)}/{Brother Printers:ConsumableMaxCapacity[{#SNMPVALUE}].last(0)}*100&gt;10&amp;{Brother Printers:ConsumableCurrentCapacity[{#SNMPVALUE}].last(0)}/{Brother Printers:ConsumableMaxCapacity[{#SNMPVALUE}].last(0)}*100&lt;30</expression>
-                            <name>{HOSTNAME} {#SNMPVALUE} - Low Warning</name>
+                            <expression>{Brother Printers:CosumableCalculated[{#SNMPVALUE}].last(0)}&gt;10&amp;{Brother Printers:CosumableCalculated[{#SNMPVALUE}].last(0)}&lt;30|{Brother Printers:ConsumableCurrentCapacity[{#SNMPVALUE}].last(0)} = -2</expression>
+                            <name>{HOSTNAME} {#SNMPVALUE} - Low Warning: {ITEM.LASTVALUE}</name>
                             <url/>
                             <status>0</status>
                             <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Brother Printers:ConsumableCurrentCapacity[{#SNMPVALUE}].last(0)}=-3|{Brother Printers:ConsumableCurrentCapacity[{#SNMPVALUE}].last(0)}/{Brother Printers:ConsumableMaxCapacity[{#SNMPVALUE}].last(0)}*100&gt;30</expression>
-                            <name>{HOSTNAME} {#SNMPVALUE} - Okay</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>1</priority>
-                            <description/>
+                            <description>Checks if at &quot;warning&quot; level for Toners (code = -2) or drum/belt (&gt;10% &amp; &lt;30%)</description>
                             <type>0</type>
                         </trigger_prototype>
                     </trigger_prototypes>
@@ -170,40 +294,34 @@
                             <height>200</height>
                             <yaxismin>0.0000</yaxismin>
                             <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>0</type>
+                            <show_work_period>0</show_work_period>
+                            <show_triggers>0</show_triggers>
+                            <type>1</type>
                             <show_legend>1</show_legend>
                             <show_3d>0</show_3d>
-                            <percent_left>100.0000</percent_left>
+                            <percent_left>0.0000</percent_left>
                             <percent_right>0.0000</percent_right>
                             <ymin_type_1>0</ymin_type_1>
-                            <ymax_type_1>0</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
+                            <ymax_type_1>2</ymax_type_1>
+                            <ymin_item_1>
+                                <host>Brother Printers</host>
+                                <key>ConsumableMaxCapacity[{#SNMPVALUE}]</key>
+                            </ymin_item_1>
+                            <ymax_item_1>
+                                <host>Brother Printers</host>
+                                <key>ConsumableMaxCapacity[{#SNMPVALUE}]</key>
+                            </ymax_item_1>
                             <graph_items>
                                 <graph_item>
                                     <sortorder>0</sortorder>
                                     <drawtype>0</drawtype>
-                                    <color>C80000</color>
+                                    <color>0000C8</color>
                                     <yaxisside>0</yaxisside>
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
                                         <host>Brother Printers</host>
                                         <key>ConsumableCurrentCapacity[{#SNMPVALUE}]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>1</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>00C800</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>Brother Printers</host>
-                                        <key>ConsumableMaxCapacity[{#SNMPVALUE}]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -214,10 +332,35 @@
             <macros/>
             <templates>
                 <template>
+                    <name>HTTP Simple Checks</name>
+                </template>
+                <template>
                     <name>Template SNMP Generic</name>
                 </template>
             </templates>
             <screens/>
         </template>
     </templates>
+    <triggers>
+        <trigger>
+            <expression>{Brother Printers:net.tcp.service[tcp,,9100].last(0)}=0</expression>
+            <name>JetDirect Service is Unreachable at {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description/>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+        <trigger>
+            <expression>{Brother Printers:net.tcp.service[tcp,,515].last(0)}=0</expression>
+            <name>Printer Spooler Service is Unreachable at {HOST.NAME}</name>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description/>
+            <type>0</type>
+            <dependencies/>
+        </trigger>
+    </triggers>
 </zabbix_export>
