@@ -1,26 +1,18 @@
-Author: Corey Ramirez-Gomez
+*Author:* Corey Ramirez-Gomez
 
-Website: www.coreyramirezgomez.com
+*Website:* www.coreyramirezgomez.com
 
-Purpose: Monitor Brother Model SNMP enabled printers.
+*Purpose:* Monitor Brother Model SNMP enabled printers.
 
-Current Verison: 
-2.0 - Consumables Check
+**Features:**
++ Check SNMP consumables like ink, toner and waste bin.
++ Check HTTP JetDirect Status
 
-Planned Versions: 
-2.5 - Paper checking?
-3.0 - Messages
+**Instructions:**
++ 1. Import the http_simple_check.xml
++ 2. Import the brother-printers-zabbix-template.xml
++ 3. Create a host and link the brother-printers-zabbix-template to it.
++ 4. Set the $COMMUNITY macro string to your SNMP Community if you have one, otherwise it will use the default.
 
-Version Details:
-1.0 - initial commit with consumable monitoring.
-2.0 - Changed the way consumables were "calculated" and delivered to the zabbix console using items instead of triggers. Added HTTP Checks, JetDirect, and Print Spooler Check:
-
-Description:
-
-Import this template into your zabbix configuration via the import button under configuration>templates.
-
-The template does the work for discovering the consumables in the printer has and will display them accordingly. 
-
-I loosely based this off the following bash script for Nagios Monitoring: http://exchange.nagios.org/directory/Plugins/Hardware/Printers/check_snmp_printer/details
-
+**Description:** The template does the work for discovering the consumables in the printer has and will display them accordingly. I loosely based this off the following bash script for Nagios Monitoring: *http://exchange.nagios.org/directory/Plugins/Hardware/Printers/check_snmp_printer/details*
 The script should also be included in the git repo, but I cannot gauruntee it is the most up to date.
