@@ -332,7 +332,7 @@ The calculations above are used in the triggers to make it very straight forward
             <macros/>
             <templates>
                 <template>
-                    <name>HTTP Simple Checks</name>
+                    <name>HTTP Simple Check</name>
                 </template>
                 <template>
                     <name>Template SNMP Generic</name>
