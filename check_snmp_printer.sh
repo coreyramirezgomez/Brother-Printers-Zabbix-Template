@@ -23,7 +23,7 @@
 ###############################################################################
 #
 #  check_snmp_printer - printer/consumables monitoring plugin for Nagios
-#  Version: 0.1.0
+#  Version: 0.2.0
 #
 ###############################################################################
 #
@@ -31,6 +31,7 @@
 #
 #  2007-05-23 - Script creation
 #  2007-06-06 - Added CONSUM ALL functionality
+#  2016-11-07 - remove all non sh standard and indented
 #
 ###############################################################################
 #
