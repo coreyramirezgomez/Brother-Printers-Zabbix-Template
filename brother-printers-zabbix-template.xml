@@ -302,15 +302,9 @@ The calculations above are used in the triggers to make it very straight forward
                             <percent_left>0.0000</percent_left>
                             <percent_right>0.0000</percent_right>
                             <ymin_type_1>0</ymin_type_1>
-                            <ymax_type_1>2</ymax_type_1>
-                            <ymin_item_1>
-                                <host>Brother Printers</host>
-                                <key>ConsumableMaxCapacity[{#SNMPVALUE}]</key>
-                            </ymin_item_1>
-                            <ymax_item_1>
-                                <host>Brother Printers</host>
-                                <key>ConsumableMaxCapacity[{#SNMPVALUE}]</key>
-                            </ymax_item_1>
+                            <ymax_type_1>0</ymax_type_1>
+                            <ymin_item_1>0</ymin_item_1>
+                            <ymax_item_1>0</ymax_item_1>
                             <graph_items>
                                 <graph_item>
                                     <sortorder>0</sortorder>
